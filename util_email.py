@@ -11,14 +11,12 @@ import config
 
 def send_email(
     recipients: list[str],
-    # /,
-    *,
     mail_body: str,
     mail_subject: str,
     attachment: str = None,
 ):
     TOKEN = config.TOKEN_UKR_NET
-    USER = config.MAIL_USER
+    USER = config.USER
     SMTP_SERVER = config.SMTP_SERVER
 
     msg = MIMEMultipart('alternative')
