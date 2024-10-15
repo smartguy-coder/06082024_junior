@@ -50,3 +50,6 @@ def send_email(
     mail.login(USER, TOKEN)
     mail.sendmail(USER, recipients, msg.as_string())
     mail.quit()
+
+
+send_email(['test_hillel_api_mailing@ukr.net'], '<h1>mail body22</h1>', 'mail subject', 'README.md')
