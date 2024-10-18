@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My page</title>
+    <style>
+        body {
+            background-color: #EEE8AA;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<h1>Good afternoon, dear {{ name }}</h1>
+<p>
+    I know, you are {{ age }} years old, so go hiking
+
+</p>
+
+
+{% if hobbies %}
+    <h3>Your hobbies</h3>
+
+    <ol>
+        {% for hobby in hobbies %}
+            <li>{{ hobby }}</li>
+        {% endfor %}
+    </ol>
+
+{% elif age > 20 %}
+    <p>You are to old for activities</p>
+
+{% else %}
+    <p>no hobbies was found</p>
+{% endif %}
+
+
+</body>
+
+</html>
