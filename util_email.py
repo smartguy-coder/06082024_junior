@@ -3,6 +3,7 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email import encoders
 import smtplib
+import jinja2
 
 import os
 
@@ -52,4 +53,9 @@ def send_email(
     mail.quit()
 
 
-send_email(['test_hillel_api_mailing@ukr.net'], '<h1>mail body22</h1>', 'mail subject', 'README.md')
+def render_html(html_path: str, params: dict) -> str:
+    template_loader = jinja2.FileSystemLoader(searchpath='./')
+    template_env = jinja2.Environment(loader=template_loader)
+    template = template_env.get_template(html_path)
+    output = template.render(params)
+    return output
