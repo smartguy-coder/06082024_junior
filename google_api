@@ -1,0 +1,23 @@
+function doGet(request) {
+  var doc = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = doc.getSheetByName('Відповіді форми (1)');
+  var values = sheet.getDataRange().getValues();
+
+  var output = [];
+
+  for(var i = 1; i<values.length; i++){
+    var row = {};
+    row['product'] = values[i][3];
+    row['price'] = values[i][4];
+    row['wasCalled'] = values[i][8];
+
+    output.push(row);
+  }
+
+  return ContentService.createTextOutput(JSON.stringify(
+    {
+      data: output,
+      count: output.length
+    }
+    )).setMimeType(ContentService.MimeType.JSON);
+}
