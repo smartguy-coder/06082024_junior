@@ -1,13 +1,7 @@
-"""
-
-
-за традицією - здаємо через Git
-
-"""
 import requests
 
-URL = 'https://script.google.com/macros/s/AKfycbyEEkTS6wsHhL3cdOZeg_4aZU9j85xsejKnqDsUgSpc7MyVMhHh6n3IHLWKEH70DAwfcw/exec'
 
+URL = 'https://script.google.com/macros/s/AKfycbyEEkTS6wsHhL3cdOZeg_4aZU9j85xsejKnqDsUgSpc7MyVMhHh6n3IHLWKEH70DAwfcw/exec'
 
 response = requests.get(URL)
 response_json = response.json()
@@ -35,8 +29,6 @@ for car_info in data:
     if service_cost_per_car > most_expensive_service_cost_per_car:
         most_expensive_service_cost_per_car = service_cost_per_car
         most_expensive_car_in_service = car_info
-
-
 
 if most_expensive_car_in_service:
     from util_email import send_email, render_html
