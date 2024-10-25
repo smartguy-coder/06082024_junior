@@ -18,17 +18,27 @@ admin = {
 # alternative(5555)
 
 
-def log_decorator(func: Callable):
+
+def template_decorator(func: Callable):
     def wrapper(*args, **kwargs):
-
         result = func(*args, **kwargs)
-        # print(func.__name__, result)
-        with open('logs', mode='a', encoding='utf-8') as file:
-            file.write(f'{func.__name__}{result}\n')
-
         return result
 
     return wrapper
+
+
+def log_decorator(file='logs'):
+    def _log_decorator(func: Callable):
+        def wrapper(*args, **kwargs):
+            result = func(*args, **kwargs)
+            # print(func.__name__, result)
+            with open(file, mode='a', encoding='utf-8') as f:
+                f.write(f'{func.__name__}{result}\n')
+
+            return result
+
+        return wrapper
+    return _log_decorator
 
 
 def permission_decorator(func: Callable):
@@ -42,16 +52,14 @@ def permission_decorator(func: Callable):
 
         print('PERMISSION DENIED')
 
-
     return wrapper
 
 
-@permission_decorator
-@log_decorator
+# @permission_decorator
+@log_decorator()
 def add_two_numbers(number_1: float, number_2: float) -> float:
     result = number_1 + number_2
     return float(result)
-
 
 
 #
@@ -61,7 +69,7 @@ def add_two_numbers(number_1: float, number_2: float) -> float:
 # add_two_numbers(number_2=5, number_1=6)
 # # add_two_numbers(    **{'m':5, 'n': 6}   )
 
-@log_decorator
+@log_decorator(file='special_logs')
 def add_three_numbers(number_1: float, number_2: float, number_3: float) -> float:
     result = number_1 + number_2 + number_3
     return float(result)
